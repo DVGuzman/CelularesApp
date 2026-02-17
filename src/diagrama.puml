@@ -1,0 +1,83 @@
+@startuml
+
+class CelularManager {
+
+    - marcas : String[]
+    - modelos : String[]
+    - precios : int[][]
+    - ANIOS : int
+    - years : int[]
+    - formatoPesos : DecimalFormat
+
+    + CelularManager(n : int)
+
+    + getMarca(i : int) : String
+    + setMarca(i : int, marca : String)
+
+    + getModelo(i : int) : String
+    + setModelo(i : int, modelo : String)
+
+    + getPrecio(i : int, j : int) : int
+    + setPrecio(i : int, j : int, precio : int)
+
+    + getCantidad() : int
+    + getYears() : int[]
+
+    + parsePrecio(valor : String) : int
+    + formatPrecio(valor : int) : String
+
+    + getInfoCelular(index : int) : String
+    + getMasBaratosPorAnio() : String
+    + getMasCarosPorAnio() : String
+    + getPromedioAnio(col : int) : String
+    + getPromedioRango(col : int) : String
+}
+
+
+class CelularesApp {
+
+    - manager : CelularManager
+    - txtCantidad : JTextField
+    - table : JTable
+    - model : DefaultTableModel
+    - comboYear : JComboBox
+    - TEXTO_VALIDO : Pattern
+
+    + CelularesApp()
+
+    - crearTabla() : void
+    - cargarDatos() : void
+    - buscarCelular() : void
+    - mostrarBaratos() : void
+    - mostrarCaros() : void
+    - mostrarPromedio() : void
+    - mostrarPromedioRango() : void
+    - validarTexto(texto : String, campo : String, fila : int) : void
+    - mostrarError(msg : String) : void
+
+    + main(args : String[]) : void
+}
+
+
+class MensajeUtil {
+
+    + mostrarError(parent : Component, msg : String) : void
+    + mostrarInfo(parent : Component, msg : String, titulo : String) : void
+}
+
+
+class ValidacionUtil {
+
+    - TEXTO_VALIDO : Pattern
+
+    + validarTexto(texto : String, campo : String, fila : int) : void
+}
+
+
+' Relaciones entre clases
+
+CelularesApp --> CelularManager : usa
+CelularesApp --> MensajeUtil : muestra
+CelularesApp --> ValidacionUtil : valida
+
+@enduml
